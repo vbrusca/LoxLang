@@ -1,8 +1,8 @@
 # LoxLang
 A C# and Java interpreter for the Lox programming language by Robert Nystrom. Easily use it as an embedded scripting language for your programs.
 
-Special thanks to Mr. Nystrom, the website for the text this project was based on is as follows:
-[Crafting Interpreters] (https://craftinginterpreters.com/)
+Special thanks to Mr. Nystrom, the website for the text this project was based on can be found here:
+[Crafting Interpreters](https://craftinginterpreters.com/)
 
 This implementation of Lox doesn't support many extended features. The language is simple in nature. This implementation supports the following unique implementation differences.
 
