@@ -8,26 +8,22 @@ import java.util.Map;
  * @author brusc
  */
 class ExternalLoxGlobal {
-        public Map<String, Object> externalGlobals;
 
-        public ExternalLoxGlobal()
-        {
-            externalGlobals = new HashMap<>();
-        }
+   public Map<String, Object> externalGlobals;
 
-        public ExternalLoxGlobal(HashMap<String, Object> externalGlobals)
-        {
-            this.externalGlobals = externalGlobals;
-        }
+   public ExternalLoxGlobal() {
+      externalGlobals = new HashMap<>();
+   }
 
-        public void defineGlobals(Environment loxGlobals)
-        {
-            if (externalGlobals != null)
-            {
-                for (String key : externalGlobals.keySet())
-                {
-                    loxGlobals.define(key, externalGlobals.get(key));
-                }
-            }
-        }
+   public ExternalLoxGlobal(HashMap<String, Object> externalGlobals) {
+      this.externalGlobals = externalGlobals;
+   }
+
+   public void defineGlobals(Environment loxGlobals) {
+      if (externalGlobals != null) {
+         for (String key : externalGlobals.keySet()) {
+            loxGlobals.define(key, externalGlobals.get(key));
+         }
+      }
+   }
 }

@@ -9,7 +9,7 @@ import java.util.Map;
  */
 public class ExternalLoxCallable implements LoxCallable {
 
-   Map<Object,HandleLoxCallables> handleCalls;
+   Map<Object, HandleLoxCallables> handleCalls;
 
    ExternalLoxCallable(Map<Object, HandleLoxCallables> handleCalls) {
       this.handleCalls = handleCalls;
@@ -22,7 +22,7 @@ public class ExternalLoxCallable implements LoxCallable {
 
    @Override
    public Object call(Interpreter interpreter, List<Object> arguments) {
-      if (handleCalls != null && arguments.size() >= 1 && handleCalls.containsKey(arguments.get(0))) {         
+      if (handleCalls != null && arguments.size() >= 1 && handleCalls.containsKey(arguments.get(0))) {
          HandleLoxCallables handleCall = handleCalls.get(arguments.get(0));
          return handleCall.call(arguments.size() - 1, interpreter, arguments);
       }
