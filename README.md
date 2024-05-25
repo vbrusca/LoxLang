@@ -11,7 +11,7 @@ This implementation of Lox doesn't support many extended features. The language 
 3. Programmatic support for injecting a list of key, value pairs into the global environment.
 4. Support for Array, List, and Dict data structures with basic get/set/add/length functionality depending on the data structure.
 5. Support for multi-line comments with nested multi-line comments.
-6. Support for a generic, easily extensible function called 'sys' that's first argument is a string indicating what code to run. Used as a quick an easy way to integrate the Lox interpreter into an application environment.
+6. Support for a generic, easily extensible function called "sys" that's first argument is a string indicating what code to run. Used as a quick an easy way to integrate the Lox interpreter into an application environment.
 7. Arbitrary number of function arguments via special handling of an arity value of -1.
 
 # Developers
@@ -35,9 +35,9 @@ Where:
 The C# version of Lox uses Visual Studio, while the Java version uses Net Beans. There are some hardcoded paths in the project configuration for easy testing. You'll have to adjust these to match your environment if you expect to test the interpreter via IDE debugging.
 
 # Lox Data Structures
-## Arrays
-You can use arrays as follows. The implementation is simple but useful.
+The following are added data structures that are simple but useful.
 
+## Arrays
 <pre>
 var array = Array(3);
 print array.length;    // Prints out "3".
@@ -69,7 +69,7 @@ print dct.get("hello");     // Prints out "world"
 To demonstrate the extensibility we'll look at the Java version but the C# version is almost identical.
 
 <pre>
-public Interpreter(HashMap<Object, HandleLoxCallables> handleCalls, HandleLoxGlobals externalGlobals) {
+public Interpreter(HashMap&lt;Object, HandleLoxCallables&gt; handleCalls, HandleLoxGlobals externalGlobals) {
    this.handleCalls = handleCalls;
    this.externalGlobals = externalGlobals;
    initialize();
@@ -115,7 +115,7 @@ globals.define("sys", externalFunctions);
 If a HashMap of - function name, LoxCallable pairs - are provided the Interpreter's constructor then you can call a "sys" function with any number of arguments that gets handled like so.
 
 <pre>
-public Object call(Interpreter interpreter, List<Object> arguments) {
+public Object call(Interpreter interpreter, List&lt;Object&gt; arguments) {
    if (handleCalls != null && arguments.size() >= 1 && handleCalls.containsKey(arguments.get(0))) {
       HandleLoxCallables handleCall = handleCalls.get(arguments.get(0));
       return handleCall.call(arguments.size() - 1, interpreter, arguments);
@@ -128,7 +128,7 @@ The first argument is the name of the "sys" function to run the entire set of ar
 
 <pre>
 interface HandleLoxCallables {
-   public Object call(int arity, Interpreter interpreter, List<Object> arguments);
+   public Object call(int arity, Interpreter interpreter, List&lt;Object&gt; arguments);
 }
 </pre>
 
