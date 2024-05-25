@@ -9,6 +9,7 @@ This implementation of Lox doesn't support many extended features. The language 
 4. Support for Array, List, and Dict data structures with basic get/set/add/length functionality depending on the data structure.
 5. Support for multi-line comments with nested multi-line comments.
 6. Support for a generic, easily extensible function called 'sys' that's first argument is a string indicating what code to run. Used as a quick an easy way to integrate the Lox interpreter into an application environment.
+7. Arbitrary number of function arguments via special handling of an arity value of -1.
 
 # Developers
 Victor G. Brusca
