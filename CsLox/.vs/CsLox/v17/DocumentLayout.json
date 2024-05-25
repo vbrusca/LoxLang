@@ -1,0 +1,143 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\FILES\\DOCUMENTS\\GitHub\\LoxLang\\CsLox\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{0D0B5841-1AD9-41ED-BE35-2D7A0E3A5BA6}|CsLox.csproj|c:\\files\\documents\\github\\loxlang\\cslox\\com\\craftinginterpreters\\lox\\loxdictset.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0D0B5841-1AD9-41ED-BE35-2D7A0E3A5BA6}|CsLox.csproj|solutionrelative:com\\craftinginterpreters\\lox\\loxdictset.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0D0B5841-1AD9-41ED-BE35-2D7A0E3A5BA6}|CsLox.csproj|c:\\files\\documents\\github\\loxlang\\cslox\\com\\craftinginterpreters\\lox\\loxdictget.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0D0B5841-1AD9-41ED-BE35-2D7A0E3A5BA6}|CsLox.csproj|solutionrelative:com\\craftinginterpreters\\lox\\loxdictget.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0D0B5841-1AD9-41ED-BE35-2D7A0E3A5BA6}|CsLox.csproj|c:\\files\\documents\\github\\loxlang\\cslox\\com\\craftinginterpreters\\lox\\interpreter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0D0B5841-1AD9-41ED-BE35-2D7A0E3A5BA6}|CsLox.csproj|solutionrelative:com\\craftinginterpreters\\lox\\interpreter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0D0B5841-1AD9-41ED-BE35-2D7A0E3A5BA6}|CsLox.csproj|c:\\files\\documents\\github\\loxlang\\cslox\\com\\craftinginterpreters\\lox\\loxdict.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0D0B5841-1AD9-41ED-BE35-2D7A0E3A5BA6}|CsLox.csproj|solutionrelative:com\\craftinginterpreters\\lox\\loxdict.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0D0B5841-1AD9-41ED-BE35-2D7A0E3A5BA6}|CsLox.csproj|c:\\files\\documents\\github\\loxlang\\cslox\\com\\craftinginterpreters\\lox\\loxlinkedlistset.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0D0B5841-1AD9-41ED-BE35-2D7A0E3A5BA6}|CsLox.csproj|solutionrelative:com\\craftinginterpreters\\lox\\loxlinkedlistset.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0D0B5841-1AD9-41ED-BE35-2D7A0E3A5BA6}|CsLox.csproj|c:\\files\\documents\\github\\loxlang\\cslox\\com\\craftinginterpreters\\lox\\dict.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0D0B5841-1AD9-41ED-BE35-2D7A0E3A5BA6}|CsLox.csproj|solutionrelative:com\\craftinginterpreters\\lox\\dict.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0D0B5841-1AD9-41ED-BE35-2D7A0E3A5BA6}|CsLox.csproj|c:\\files\\documents\\github\\loxlang\\cslox\\com\\craftinginterpreters\\lox\\linkedlist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0D0B5841-1AD9-41ED-BE35-2D7A0E3A5BA6}|CsLox.csproj|solutionrelative:com\\craftinginterpreters\\lox\\linkedlist.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 189,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e1b7d1f8-9b3c-49b1-8f4f-bfc63a88835d}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Interpreter.cs",
+              "DocumentMoniker": "C:\\FILES\\DOCUMENTS\\GitHub\\LoxLang\\CsLox\\com\\craftinginterpreters\\lox\\Interpreter.cs",
+              "RelativeDocumentMoniker": "com\\craftinginterpreters\\lox\\Interpreter.cs",
+              "ToolTip": "C:\\FILES\\DOCUMENTS\\GitHub\\LoxLang\\CsLox\\com\\craftinginterpreters\\lox\\Interpreter.cs",
+              "RelativeToolTip": "com\\craftinginterpreters\\lox\\Interpreter.cs",
+              "ViewState": "AQIAACEAAAAAAAAAAAAAADAAAAAgAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-25T19:12:21.953Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "LoxLinkedListSet.cs",
+              "DocumentMoniker": "C:\\FILES\\DOCUMENTS\\GitHub\\LoxLang\\CsLox\\com\\craftinginterpreters\\lox\\LoxLinkedListSet.cs",
+              "RelativeDocumentMoniker": "com\\craftinginterpreters\\lox\\LoxLinkedListSet.cs",
+              "ToolTip": "C:\\FILES\\DOCUMENTS\\GitHub\\LoxLang\\CsLox\\com\\craftinginterpreters\\lox\\LoxLinkedListSet.cs",
+              "RelativeToolTip": "com\\craftinginterpreters\\lox\\LoxLinkedListSet.cs",
+              "ViewState": "AQIAAAYAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-25T19:09:39.19Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "LoxDictSet.cs",
+              "DocumentMoniker": "C:\\FILES\\DOCUMENTS\\GitHub\\LoxLang\\CsLox\\com\\craftinginterpreters\\lox\\LoxDictSet.cs",
+              "RelativeDocumentMoniker": "com\\craftinginterpreters\\lox\\LoxDictSet.cs",
+              "ToolTip": "C:\\FILES\\DOCUMENTS\\GitHub\\LoxLang\\CsLox\\com\\craftinginterpreters\\lox\\LoxDictSet.cs",
+              "RelativeToolTip": "com\\craftinginterpreters\\lox\\LoxDictSet.cs",
+              "ViewState": "AQIAAA0AAAAAAAAAAAAAwBIAAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-25T19:07:15.475Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "LoxDictGet.cs",
+              "DocumentMoniker": "C:\\FILES\\DOCUMENTS\\GitHub\\LoxLang\\CsLox\\com\\craftinginterpreters\\lox\\LoxDictGet.cs",
+              "RelativeDocumentMoniker": "com\\craftinginterpreters\\lox\\LoxDictGet.cs",
+              "ToolTip": "C:\\FILES\\DOCUMENTS\\GitHub\\LoxLang\\CsLox\\com\\craftinginterpreters\\lox\\LoxDictGet.cs",
+              "RelativeToolTip": "com\\craftinginterpreters\\lox\\LoxDictGet.cs",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAABkAAAAXAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-25T19:05:02.883Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "LoxDict.cs",
+              "DocumentMoniker": "C:\\FILES\\DOCUMENTS\\GitHub\\LoxLang\\CsLox\\com\\craftinginterpreters\\lox\\LoxDict.cs",
+              "RelativeDocumentMoniker": "com\\craftinginterpreters\\lox\\LoxDict.cs",
+              "ToolTip": "C:\\FILES\\DOCUMENTS\\GitHub\\LoxLang\\CsLox\\com\\craftinginterpreters\\lox\\LoxDict.cs",
+              "RelativeToolTip": "com\\craftinginterpreters\\lox\\LoxDict.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAADAAAAARAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-25T19:01:09.667Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "LinkedList.cs",
+              "DocumentMoniker": "C:\\FILES\\DOCUMENTS\\GitHub\\LoxLang\\CsLox\\com\\craftinginterpreters\\lox\\LinkedList.cs",
+              "RelativeDocumentMoniker": "com\\craftinginterpreters\\lox\\LinkedList.cs",
+              "ToolTip": "C:\\FILES\\DOCUMENTS\\GitHub\\LoxLang\\CsLox\\com\\craftinginterpreters\\lox\\LinkedList.cs",
+              "RelativeToolTip": "com\\craftinginterpreters\\lox\\LinkedList.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAUAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-25T18:58:45.161Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Dict.cs",
+              "DocumentMoniker": "C:\\FILES\\DOCUMENTS\\GitHub\\LoxLang\\CsLox\\com\\craftinginterpreters\\lox\\Dict.cs",
+              "RelativeDocumentMoniker": "com\\craftinginterpreters\\lox\\Dict.cs",
+              "ToolTip": "C:\\FILES\\DOCUMENTS\\GitHub\\LoxLang\\CsLox\\com\\craftinginterpreters\\lox\\Dict.cs",
+              "RelativeToolTip": "com\\craftinginterpreters\\lox\\Dict.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA0AAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-25T18:56:03.633Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+C:\FILES\DOCUMENTS\GitHub\LoxLang\CsLox\bin\Release\CsLox.exe.config
+C:\FILES\DOCUMENTS\GitHub\LoxLang\CsLox\bin\Release\CsLox.exe
+C:\FILES\DOCUMENTS\GitHub\LoxLang\CsLox\bin\Release\CsLox.pdb
+C:\FILES\DOCUMENTS\GitHub\LoxLang\CsLox\obj\Release\CsLox.csproj.AssemblyReference.cache
+C:\FILES\DOCUMENTS\GitHub\LoxLang\CsLox\obj\Release\CsLox.csproj.CoreCompileInputs.cache
+C:\FILES\DOCUMENTS\GitHub\LoxLang\CsLox\obj\Release\CsLox.exe
+C:\FILES\DOCUMENTS\GitHub\LoxLang\CsLox\obj\Release\CsLox.pdb

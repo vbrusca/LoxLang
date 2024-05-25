@@ -1,0 +1,138 @@
+
+//-f C:\FILES\DOCUMENTS\GitHub\LoxLang\test.lox
+
+sys("test", "fake argument");
+var tt = GBL_ONE + 1;
+var max = GBL_NUM_MAX;
+
+var a = "global a";
+var b = "global b";
+var c = "global c";
+{
+  var a = "outer a";
+  var b = "outer b";
+  {
+    var a = "inner a";
+    print a;
+    print b;
+    print c;
+  }
+  print a;
+  print b;
+  print c;
+}
+print a;
+print b;
+print c;
+
+print "hi" or 2; // "hi".
+print nil or "yes"; // "yes".
+
+
+if(true) {
+	print "if statement";
+} else {
+	print "else statement";
+}
+
+var a = 10;
+var temp;
+
+for (var b = 1; a < 10000; b = temp + b) {
+  print a;
+  temp = a;
+  a = b;
+}
+
+
+fun sayHi(first, last) {
+  print "Hi, " + first + " " + last + "!";
+}
+
+sayHi("Dear", "Reader");
+
+/*
+multiline comments
+*/
+
+fun fib(n) {
+  if (n <= 1) return n;
+  return fib(n - 2) + fib(n - 1);
+}
+
+for (var i = 0; i < 10; i = i + 1) {
+  print fib(i);
+}
+
+
+fun makeCounter() {
+  var i = 0;
+  fun count() {
+    i = i + 1;
+    print i;
+  }
+
+  return count;
+}
+
+var counter = makeCounter();
+counter(); // "1".
+counter(); // "2".
+
+/**/
+
+class A {
+  method() {
+    print "A method";
+  }
+}
+
+class B < A {
+  method() {
+    print "B method";
+  }
+
+  test() {
+    super.method();
+  }
+}
+
+class C < B {}
+
+C().test();
+
+
+
+var array = Array(3);
+
+// "length" returns the number of elements.
+print array.length; // "3".
+
+// "set" sets the element at the given index to the given value.
+array.set(1, "new");
+
+// "get" returns the element at a given index.
+print array.get(1); // "new".
+
+
+var list = List();
+
+// "length" returns the number of elements.
+print list.length; // "0".
+
+// "set" sets the element at the given index to the given value.
+list.add("new");
+list.add("old");
+list.set(0, "newer");
+
+// "get" returns the element at a given index.
+print list.get(0); // "newer".
+
+
+var dct = Dict();
+dct.set("hello", "world");
+dct.set(2, "test");
+
+print dct.length;
+print dct.get(2);
+print dct.get("hello");
