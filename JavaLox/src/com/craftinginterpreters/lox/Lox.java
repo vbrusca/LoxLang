@@ -3,10 +3,26 @@ package com.craftinginterpreters.lox;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.hc.client5.http.classic.methods.HttpGet;
+import org.apache.hc.client5.http.classic.methods.HttpPost;
+import org.apache.hc.client5.http.entity.UrlEncodedFormEntity;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
+import org.apache.hc.client5.http.impl.classic.HttpClients;
+import org.apache.hc.core5.http.HttpEntity;
+import org.apache.hc.core5.http.NameValuePair;
+import org.apache.hc.core5.http.ParseException;
+import org.apache.hc.core5.http.io.entity.EntityUtils;
+import org.apache.hc.core5.http.message.BasicNameValuePair;
+import org.apache.hc.core5.net.URIBuilder;
 
 /**
  * An implementation of the "Lox" embedded scripting language. This work was
@@ -17,6 +33,12 @@ import java.util.List;
  * Nystrom, Copyright Middlemind Games 05/03/2024
  */
 public class Lox {
+
+   public enum HttpCallType {
+      GET_BLANK,
+      GET_QUERY_PARAMS,
+      POST
+   }
 
    private static final Interpreter interpreter = new Interpreter();
    static boolean hadError = false;
@@ -73,6 +95,96 @@ public class Lox {
       } else {
          System.out.println("Usage: JavaLox ([-f script file] | [-s script string] | [-p REPL]) & [-gf script file] [-gs script string]");
          System.exit(64);
+      }
+   }
+
+   public static String getBlank(String url) {
+      String resultContent = null;
+      HttpGet httpGet = new HttpGet(url);
+      try (CloseableHttpClient httpclient = HttpClients.createDefault()) {
+         try (CloseableHttpResponse response = httpclient.execute(httpGet)) {
+            // Get status code
+            System.out.println(response.getVersion()); // HTTP/1.1
+            System.out.println(response.getCode()); // 200
+            System.out.println(response.getReasonPhrase()); // OK
+            HttpEntity entity = response.getEntity();
+            // Get response information
+            resultContent = EntityUtils.toString(entity);
+         }
+      } catch (IOException | ParseException e) {
+         e.printStackTrace();
+      }
+      return resultContent;
+   }
+
+   public static String getQueryParams(String url, List<NameValuePair> nvps) {
+      String resultContent = null;
+      HttpGet httpGet = new HttpGet(url);
+
+      //List<NameValuePair> nvps = new ArrayList<>();
+      // GET Query Parameters
+      //nvps.add(new BasicNameValuePair("username", "wdbyte.com"));
+      //nvps.add(new BasicNameValuePair("password", "secret"));
+      // Add to the request URL
+      try {
+         URI uri = new URIBuilder(new URI(url))
+                 .addParameters(nvps)
+                 .build();
+         httpGet.setUri(uri);
+      } catch (URISyntaxException e) {
+         throw new RuntimeException(e);
+      }
+
+      try (CloseableHttpClient httpclient = HttpClients.createDefault()) {
+         try (CloseableHttpResponse response = httpclient.execute(httpGet)) {
+
+            System.out.println(response.getVersion()); // HTTP/1.1
+            System.out.println(response.getCode()); // 200
+            System.out.println(response.getReasonPhrase()); // OK
+            HttpEntity entity = response.getEntity();
+
+            resultContent = EntityUtils.toString(entity);
+         }
+      } catch (IOException | ParseException e) {
+         e.printStackTrace();
+      }
+      return resultContent;
+   }
+
+   public static String post(String url, List<NameValuePair> nvps) {
+      String result = null;
+      HttpPost httpPost = new HttpPost(url);
+      // form parameters.
+      //List<NameValuePair> nvps = new ArrayList<>();
+      //nvps.add(new BasicNameValuePair("username", "wdbyte.com"));
+      //nvps.add(new BasicNameValuePair("password", "secret"));
+      httpPost.setEntity(new UrlEncodedFormEntity(nvps));
+      try (CloseableHttpClient httpclient = HttpClients.createDefault()) {
+         try (CloseableHttpResponse response = httpclient.execute(httpPost)) {
+            System.out.println(response.getVersion()); // HTTP/1.1
+            System.out.println(response.getCode()); // 200
+            System.out.println(response.getReasonPhrase()); // OK
+
+            HttpEntity entity = response.getEntity();
+            result = EntityUtils.toString(entity);
+            // Ensure that the stream is fully consumed
+            EntityUtils.consume(entity);
+         }
+      } catch (IOException | ParseException e) {
+         e.printStackTrace();
+      }
+      return result;
+   }
+
+   private static String runUrl(String url, HttpCallType callType, List<NameValuePair> data) {
+      if (callType == HttpCallType.GET_BLANK) {
+         return getBlank(url);
+      } else if (callType == HttpCallType.GET_QUERY_PARAMS) {
+         return getQueryParams(url, data);
+      } else if (callType == HttpCallType.POST) {
+         return post(url, data);
+      } else {
+         return null;
       }
    }
 
