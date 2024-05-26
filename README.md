@@ -17,7 +17,7 @@ This implementation of Lox doesn't support many extended features. The language 
 
 # Developers
 Victor G. Brusca
-Carlo Bruscani
+<br/>Carlo Bruscani
 
 # CLI Arguments
 An example of the CLI arguments are as follows:
@@ -31,6 +31,11 @@ Where:
 -p = Runs a Lox REPL.
 -gf = A Lox file script to process, loading globals, before running the intended script.
 -gs = A Lox string script to process, loading globals, before running the intended script.   
+</pre>
+
+## Example CLI Call
+<pre>
+CsLox -f "C:\FILES\DOCUMENTS\GitHub\LoxLang\test.lox" -gs "var GBL_BASE_NAT_LOG = 2.71828;" -gf "C:\FILES\DOCUMENTS\GitHub\LoxLang\globals.lox"
 </pre>
 
 # Errata
