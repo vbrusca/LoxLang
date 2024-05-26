@@ -39,7 +39,10 @@ CsLox -f "C:\FILES\DOCUMENTS\GitHub\LoxLang\test.lox" -gs "var GBL_BASE_NAT_LOG 
 </pre>
 
 # Errata
-The C# version of Lox uses Visual Studio, while the Java version uses Net Beans. There are some hardcoded paths in the project configuration for easy testing. You'll have to adjust these to match your environment if you expect to test the interpreter via IDE debugging.
+- The C# version of Lox uses Visual Studio.
+- The Java version uses NetBeans.
+- There are some hardcoded paths in the project configuration for easy testing. You'll have to adjust these to match your environment if you expect to test the interpreter via IDE debugging.
+** The test file, "test.lox", expects the globals from the file "globals.lox" and the CLI global "GBL_BASE_NAT_LOG" to be injected before the test script is executed. **
 
 # Lox Data Structures
 The following are added data structures that are simple but useful.
