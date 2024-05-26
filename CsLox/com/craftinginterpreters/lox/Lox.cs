@@ -18,31 +18,16 @@ namespace com.craftinginterpreters.lox
     /// </summary>
     public class Lox
     {
-        /// <summary>
-        /// 
-        /// </summary>
         private static readonly Interpreter interpreter = new Interpreter();
-
-        /// <summary>
-        /// 
-        /// </summary>
         internal static bool hadError = false;
-
-        /// <summary>
-        /// 
-        /// </summary>
         internal static bool hadRuntimeError = false;
-
-        /// <summary>
-        /// 
-        /// </summary>
         internal static String lastError = null;
 
-        internal static String globals = null;
-        internal static bool hasGlobals = false;
-
+        internal static String globalsFile = null;
+        internal static String globalsScript = null;
+        internal static bool hasGlobalsFile = false;
+        internal static bool hasGlobalsScript = false;
         internal static String lastFile = null;
-
         internal static String lastLine = null;
 
         /// <summary>
@@ -52,24 +37,42 @@ namespace com.craftinginterpreters.lox
         /// <param name="args"></param>
         public static void Main(String[] args)
         {
-            hasGlobals = false;
-            for(int i = 0; i < args.Length; i++)
+            hasGlobalsFile = false;
+            hasGlobalsScript = false;
+            for (int i = 0; i < args.Length; i++)
             {
-                if (args[i] != null && args[i] == "-g")
+                if (args[i] != null && args[i].Equals("-gf"))
                 {
-                    if(i + 1 < args.Length)
+                    if (i + 1 < args.Length)
                     {
-                        globals = args[i + 1];
-                        hasGlobals = true;
+                        globalsFile = args[i + 1];
+                        hasGlobalsFile = true;
+
+                        break;
+                    }
+                }
+                else if (args[i] != null && args[i].Equals("-gs"))
+                {
+                    if (i + 1 < args.Length)
+                    {
+                        globalsScript = args[i + 1];
+                        hasGlobalsScript = true;
+
                         break;
                     }
                 }
             }
 
-            if(hasGlobals)
+            if (hasGlobalsFile)
             {
-                System.Console.Out.WriteLine("Found global file to import: " + globals);
-                runFile(globals);
+                System.Console.Out.WriteLine("Found global file to import: " + globalsFile);
+                runFile(globalsFile);
+            }
+
+            if (hasGlobalsScript)
+            {
+                System.Console.Out.WriteLine("Found global script to import: " + globalsScript);
+                run(globalsScript);
             }
 
             if (args.Length >= 1 && args[0] != null && args[0].ToLower().Equals("-p"))
@@ -86,17 +89,13 @@ namespace com.craftinginterpreters.lox
             }
             else
             {
-                String str = "Usage: CsLox ([-f script] | [-s string] | [-p]) & [-g script]";
+                String str = "Usage: CsLox  ([-f script file] | [-s script string] | [-p REPL]) & [-gf script file] [-gs script string]";
                 System.Diagnostics.Debug.WriteLine(str);
                 System.Console.Out.WriteLine(str);
                 System.Environment.Exit(64);
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="path"></param>
         private static void runFile(String path)
         {
             lastFile = path;
@@ -109,9 +108,6 @@ namespace com.craftinginterpreters.lox
             if (hadRuntimeError) System.Environment.Exit(70);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
         private static void runPrompt()
         {
             //Control-D to exit
@@ -125,20 +121,13 @@ namespace com.craftinginterpreters.lox
                 {
                     run(line);
                 } 
-                catch (Exception e)
-                {
-                    //do nothing
-                }
+                catch (Exception e) {}
 
                 hadError = false;
                 hadRuntimeError = false;
             }
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="source"></param>
         private static void run(String source)
         {
             lastLine = source;
@@ -159,11 +148,6 @@ namespace com.craftinginterpreters.lox
             interpreter.interpret(statements);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="line"></param>
-        /// <param name="message"></param>
         internal static void log(int line, String message)
         {
             String str = "[line " + line + "] Log: " + message;
@@ -171,22 +155,11 @@ namespace com.craftinginterpreters.lox
             System.Console.Out.WriteLine(str);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="line"></param>
-        /// <param name="message"></param>
         internal static void error(int line, String message)
         {
             report(line, "", message);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="line"></param>
-        /// <param name="where"></param>
-        /// <param name="message"></param>
         private static void report(int line, String where, String message)
         {
             lastError = "[line " + line + "] Error" + where + ": " + message;
@@ -195,11 +168,6 @@ namespace com.craftinginterpreters.lox
             hadError = true;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="token"></param>
-        /// <param name="message"></param>
         internal static void error(Token token, String message)
         {
             if (token.type == TokenType.EOF)
@@ -227,10 +195,6 @@ namespace com.craftinginterpreters.lox
             return sb.ToString();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="error"></param>
         internal static void runtimeError(RuntimeError error)
         {
             String msg = error.Message + "\n[line " + error.token.line + "]";

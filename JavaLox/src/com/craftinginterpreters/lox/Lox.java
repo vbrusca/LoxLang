@@ -18,31 +18,16 @@ import java.util.List;
  */
 public class Lox {
 
-   /**
-    *
-    */
    private static final Interpreter interpreter = new Interpreter();
-
-   /**
-    *
-    */
    static boolean hadError = false;
-
-   /**
-    *
-    */
    static boolean hadRuntimeError = false;
-
-   /**
-    *
-    */
    static String lastError = null;
 
-   static String globals = null;
-   static boolean hasGlobals = false;
-
+   static String globalsFile = null;
+   static String globalsScript = null;   
+   static boolean hasGlobalsFile = false;
+   static boolean hasGlobalsScript = false;   
    static String lastFile = null;
-
    static String lastLine = null;
 
    /**
@@ -53,22 +38,35 @@ public class Lox {
     * @throws IOException
     */
    public static void main(String[] args) throws IOException {
-      hasGlobals = false;
+      hasGlobalsFile = false;
+      hasGlobalsScript = false;
       for (int i = 0; i < args.length; i++) {
-         if (args[i] != null && args[i].equals("-g")) {
+         if (args[i] != null && args[i].equals("-gf")) {
             if (i + 1 < args.length) {
-               globals = args[i + 1];
-               hasGlobals = true;
+               globalsFile = args[i + 1];
+               hasGlobalsFile = true;
+
+               break;
+            }
+         } else if (args[i] != null && args[i].equals("-gs")) {
+            if (i + 1 < args.length) {
+               globalsScript = args[i + 1];
+               hasGlobalsScript = true;
 
                break;
             }
          }
       }
 
-      if (hasGlobals) {
-         System.out.println("Found global file to import: " + globals);
-         runFile(globals);
+      if (hasGlobalsFile) {
+         System.out.println("Found global file to import: " + globalsFile);
+         runFile(globalsFile);
       }
+      
+      if (hasGlobalsScript) {
+         System.out.println("Found global script to import: " + globalsScript);
+         run(globalsScript);
+      }      
 
       if (args.length >= 1 && args[0] != null && args[0].toLowerCase().equals("-p")) {
          runPrompt();
@@ -77,16 +75,11 @@ public class Lox {
       } else if (args.length >= 2 && args[0] != null && args[0].toLowerCase().equals("-s") && args[1] != null) {
          run(args[1]);
       } else {
-         System.out.println("Usage: JavaLox ([-f script] | [-s string] | [-p]) & [-g script]");
+         System.out.println("Usage: JavaLox ([-f script file] | [-s script string] | [-p REPL]) & [-gf script file] [-gs script string]");
          System.exit(64);
       }
    }
 
-   /**
-    *
-    * @param path
-    * @throws IOException
-    */
    private static void runFile(String path) throws IOException {
       lastFile = path;
       byte[] bytes = Files.readAllBytes(Paths.get(path));
@@ -101,10 +94,6 @@ public class Lox {
       }
    }
 
-   /**
-    *
-    * @throws IOException
-    */
    private static void runPrompt() throws IOException {
       InputStreamReader input = new InputStreamReader(System.in);
       BufferedReader reader = new BufferedReader(input);
@@ -152,41 +141,20 @@ public class Lox {
       interpreter.interpret(statements);
    }
 
-   /**
-    *
-    * @param line
-    * @param message
-    */
    static void log(int line, String message) {
       System.out.println("[line " + line + "] Log: " + message);
    }
 
-   /**
-    *
-    * @param line
-    * @param message
-    */
    static void error(int line, String message) {
       report(line, "", message);
    }
 
-   /**
-    *
-    * @param line
-    * @param where
-    * @param message
-    */
    private static void report(int line, String where, String message) {
       lastError = "[line " + line + "] Error" + where + ": " + message;
       System.err.println(lastError);
       hadError = true;
    }
 
-   /**
-    *
-    * @param token
-    * @param message
-    */
    static void error(Token token, String message) {
       if (token.type == TokenType.EOF) {
          report(token.line, " at end", message);
@@ -195,10 +163,6 @@ public class Lox {
       }
    }
 
-   /**
-    *
-    * @param error
-    */
    static void runtimeError(RuntimeError error) {
       String msg = error.getMessage() + "\n[line " + error.token.line + "]";
       System.err.println(msg);
