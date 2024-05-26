@@ -24,9 +24,9 @@ public class Lox {
    static String lastError = null;
 
    static String globalsFile = null;
-   static String globalsScript = null;   
+   static String globalsScript = null;
    static boolean hasGlobalsFile = false;
-   static boolean hasGlobalsScript = false;   
+   static boolean hasGlobalsScript = false;
    static String lastFile = null;
    static String lastLine = null;
 
@@ -58,11 +58,11 @@ public class Lox {
          Lox.log(0, "Found global file to import: " + globalsFile);
          runFile(globalsFile);
       }
-      
+
       if (hasGlobalsScript) {
          Lox.log(0, "Found global script to import: " + globalsScript);
          run(globalsScript);
-      }      
+      }
 
       if (args.length >= 1 && args[0] != null && args[0].toLowerCase().equals("-p")) {
          runPrompt();
