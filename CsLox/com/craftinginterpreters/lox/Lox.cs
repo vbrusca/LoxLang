@@ -47,31 +47,27 @@ namespace com.craftinginterpreters.lox
                     {
                         globalsFile = args[i + 1];
                         hasGlobalsFile = true;
-
-                        break;
                     }
-                }
+                } 
                 else if (args[i] != null && args[i].Equals("-gs"))
                 {
                     if (i + 1 < args.Length)
                     {
                         globalsScript = args[i + 1];
                         hasGlobalsScript = true;
-
-                        break;
                     }
                 }
             }
 
             if (hasGlobalsFile)
             {
-                System.Console.Out.WriteLine("Found global file to import: " + globalsFile);
+                Lox.log(0, "Found global file to import: " + globalsFile);
                 runFile(globalsFile);
             }
 
             if (hasGlobalsScript)
             {
-                System.Console.Out.WriteLine("Found global script to import: " + globalsScript);
+                Lox.log(0, "Found global script to import: " + globalsScript);
                 run(globalsScript);
             }
 

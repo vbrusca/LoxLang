@@ -1,6 +1,8 @@
 
 //-f C:\FILES\DOCUMENTS\GitHub\LoxLang\test.lox
 
+print GBL_BASE_NAT_LOG;
+
 sys("test", "fake argument");
 var tt = GBL_ONE + 1;
 var max = GBL_NUM_MAX;
