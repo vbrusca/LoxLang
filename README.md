@@ -8,11 +8,12 @@ This implementation of Lox doesn't support many extended features. The language 
 
 1. Support for 'null' along side 'nil'.
 2. Command line/programmatic support for processing a 'globals' file that contains Lox source code that drives entries into the global environment.
-3. Programmatic support for injecting a list of key, value pairs into the global environment.
-4. Support for Array, List, and Dict data structures with basic get/set/add/length functionality depending on the data structure.
-5. Support for multi-line comments with nested multi-line comments.
-6. Support for a generic, easily extensible function called "sys" that's first argument is a string indicating what code to run. Used as a quick an easy way to integrate the Lox interpreter into an application environment.
-7. Arbitrary number of function arguments via special handling of an arity value of -1.
+3. Command line/programmatic support for processing a 'globals' script string that contains Lox source code that drives entries into the global environment.
+4. Programmatic support for injecting a list of key, value pairs into the global environment.
+5. Support for Array, List, and Dict data structures with basic get/set/add/length functionality depending on the data structure.
+6. Support for multi-line comments with nested multi-line comments.
+7. Support for a generic, easily extensible function called "sys" that's first argument is a string indicating what code to run. Used as a quick an easy way to integrate the Lox interpreter into an application environment.
+8. Arbitrary number of function arguments via special handling of an arity value of -1.
 
 # Developers
 Victor G. Brusca
@@ -22,13 +23,14 @@ Carlo Bruscani
 An example of the CLI arguments are as follows:
 
 <pre>
-Usage: JavaLox ([-f script] | [-s string] | [-p]) & [-g script]
+Usage: [JavaLox | CsLox] ([-f script file] | [-s script string] | [-p REPL]) & [-gf script file] [-gs script string]
 
 Where:
 -f = Run a Lox script.
 -s = Run a Lox program in a string.
 -p = Runs a Lox REPL.
--g = A Lox script to process, loading globals, before running the intended script.
+-gf = A Lox file script to process, loading globals, before running the intended script.
+-gs = A Lox string script to process, loading globals, before running the intended script.   
 </pre>
 
 # Errata
