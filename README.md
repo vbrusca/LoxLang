@@ -136,7 +136,7 @@ public Object call(Interpreter interpreter, List&lt;Object&gt; arguments) {
 }
 </pre>
 
-The first argument is the name of the "sys" function to run. The entire set of arguments is then passed onto the "HandleLoxCallables" instance for the given string and with an arity of -1. Note the first argument defining what subfunction to run is not removed from the arguments even thogh the arity is the argument length minus one. 
+The first argument is the name of the "sys" function to run. The entire set of arguments is then passed onto the "HandleLoxCallables" instance for the given string and with an arity of -1. Note the first argument defining what subfunction to run is not removed from the arguments even though the arity is the argument length minus one. 
 
 <pre>
 interface HandleLoxCallables {
