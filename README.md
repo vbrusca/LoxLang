@@ -39,7 +39,7 @@ Where:
 -gs = A Lox string script to process, loading globals, before running the intended script.
 -gu = A Lox URL script to process, loading globals, before running the intended script, expect a script JSON = { "script":"some Lox code here" }.
 -ru = A URL to send a execution response message to.
--gv = The global variable to return after script execution, doesn't support Objects.
+-gv = The global variable to return after script execution, objects are converted to a JSON string.
 </pre>
 
 ## Example CLI Call
