@@ -184,7 +184,7 @@ public class Lox {
                 /*
                 -f "C:\FILES\OIT_LAPTOP_BACKUP\DOCUMENTS\GitHub\LoxLang\test.lox" -gs "var GBL_BASE_NAT_LOG = 2.71828;" -gf "C:\FILES\OIT_LAPTOP_BACKUP\DOCUMENTS\GitHub\LoxLang\globals.lox"
                 -u https://localhost:7109/getScript -gs "var GBL_BASE_NAT_LOG = 2.71828;" -gf "C:\FILES\OIT_LAPTOP_BACKUP\DOCUMENTS\GitHub\LoxLang\globals.lox" -gu https://localhost:7109/getGlobal -ru https://localhost:7109/setAnswer -gv urlGlobal
-                */
+                 */
                 String str = "Usage: JavaLox  ([-f script file] | [-s script string] | [-u script url] | [-p REPL]) & [-gf script file] [-gs script string] [-gu script url] [-ru url] [-gv global variable name to respond with]";
                 System.out.println(str);
                 System.exit(64);
@@ -195,8 +195,11 @@ public class Lox {
                 if (values.containsKey(returnUrlGlobalVarName)) {
                     Object obj = values.get(returnUrlGlobalVarName);
                     String value = (obj + "");
-                    if(obj instanceof Boolean) {
+                    if (obj instanceof Boolean || (obj != null && value.getClass() != null && obj.getClass().getName().equals("Boolean"))) {
                         value = value.toLowerCase();
+                    } else if (obj instanceof Object || (obj != null && value.getClass() != null && obj.getClass().getName().equals("Object"))) {
+                        Gson gson = new Gson();
+                        value = gson.toJson(obj);
                     }
                     List<NameValuePair> data = new ArrayList<>();
                     data.add(new BasicNameValuePair("answer", value));

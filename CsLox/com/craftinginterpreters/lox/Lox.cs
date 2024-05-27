@@ -213,8 +213,13 @@ namespace com.craftinginterpreters.lox
                     {
                         Object obj = values[returnUrlGlobalVarName];
                         String value = (obj + "");
-                        if (obj is bool || obj is Boolean || obj.GetType().Name == "Boolean") {
+                        if (obj is bool || obj is Boolean || (obj != null && obj.GetType() != null && obj.GetType().Name == "Boolean"))
+                        {
                             value = value.ToLower();
+                        }
+                        else if (obj is object || obj is Object || (obj != null && obj.GetType() != null && obj.GetType().Name == "Object"))
+                        {
+                            value = Newtonsoft.Json.JsonConvert.SerializeObject(obj);
                         }
                         List<NameValuePair> data = new List<NameValuePair>();
                         data.Add(new BasicNameValuePair("answer", value));

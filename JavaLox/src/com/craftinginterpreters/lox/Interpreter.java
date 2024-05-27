@@ -1,5 +1,6 @@
 package com.craftinginterpreters.lox;
 
+import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -398,7 +399,10 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Object> {
       String str = stringify(value);
       if (value instanceof Boolean || (value != null && value.getClass() != null && value.getClass().getName().equals("Boolean"))) {
          str = str.toLowerCase();
-      }      
+      } else if (value instanceof Object || (value != null && value.getClass() != null && value.getClass().getName().equals("Object"))) {
+         Gson gson = new Gson();
+         str = gson.toJson(value);
+      }
       System.out.println(str);
       return null;
    }

@@ -396,6 +396,10 @@ namespace com.craftinginterpreters.lox
             {
                 str = str.ToLower();
             }
+            else if (value is object || value is Object || (value != null && value.GetType() != null && value.GetType().Name == "Object"))
+            {
+                str = Newtonsoft.Json.JsonConvert.SerializeObject(value);
+            }
             System.Diagnostics.Debug.WriteLine(str);
             System.Console.Out.WriteLine(str);
             return null;
