@@ -14,9 +14,11 @@ This implementation of Lox doesn't support many extended features. The language 
 6. Support for multi-line comments with nested multi-line comments.
 7. Support for a generic, easily extensible function called "sys" that's first argument is a string indicating what code to run. Used as a quick an easy way to integrate the Lox interpreter into an application environment.
 8. Arbitrary number of function arguments via special handling of an arity value of -1.
-9. Support for retrieving the script to execute from a URL.
-10. Support for retrieving a globals script to run from a URL.
-11. Support for returning a global variable after script execution to a URL.
+9. **Support for retrieving the script to execute from a URL.
+10. **Support for retrieving a globals script to run from a URL.
+11. **Support for returning a global variable after script execution to a URL.
+
+** With this support Lox can act as a data driven execution subsystem in part of a larger application where the language has been integrated to some extent using globals, "sys", or other customizations.
 
 # Developers
 Victor G. Brusca
@@ -52,6 +54,33 @@ You can test URL functionality by using the CsLoxTestServer project, Visual Stud
 
 <pre>
 keytool -import -trustcacerts -alias LOX_LOCAL -file "C:\Users\brusc\Downloads\localhost.pem | .cer" -keystore "C:\Program Files\Java\jdk-21\lib\security\cacerts" -storepass LOX_LOCAL            
+</pre>
+
+## Example Output from a URL Test
+
+<pre>
+run:
+[line 0] Log: Found global file to import: C:\FILES\OIT_LAPTOP_BACKUP\DOCUMENTS\GitHub\LoxLang\globals.lox
+[line 0] Log: Found global script to import: var GBL_BASE_NAT_LOG = 2.71828;
+[line 0] Log: Found global script to import: https://localhost:7109/getGlobal
+SLF4J: Failed to load class "org.slf4j.impl.StaticLoggerBinder".
+SLF4J: Defaulting to no-operation (NOP) logger implementation
+SLF4J: See http://www.slf4j.org/codes.html#StaticLoggerBinder for further details.
+HTTP/1.1
+200
+OK
+[line 0] Log: Run URL Response: '{ "script":"var urlGlobal = true;"}'
+HTTP/1.1
+200
+OK
+[line 0] Log: Run URL Response: '{ "script":"urlGlobal = false;
+print urlGlobal;"}'
+false
+HTTP/1.1
+200
+OK
+[line 0] Log: Return URL Response: '{ "msg":"Found answer: 'false, urlGlobal'" }'
+BUILD SUCCESSFUL (total time: 1 second)   
 </pre>
 
 # Errata
