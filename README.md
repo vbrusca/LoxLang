@@ -38,7 +38,7 @@ Where:
 -gf = A Lox file script to process, loading globals, before running the intended script.
 -gs = A Lox string script to process, loading globals, before running the intended script.
 -gu = A Lox URL script to process, loading globals, before running the intended script, expect a script JSON = { "script":"some Lox code here" }.
--ru = A URL to send a execution response message to.
+-ru = A URL to send an execution response message to. Sends form key value pairs as strings: "answer" = "variable value as string" and "variableName" = "name of the global variable used".
 -gv = The global variable to return after script execution, objects are converted to a JSON string.
 </pre>
 
@@ -47,6 +47,10 @@ Where:
 CsLox -f "C:\FILES\OIT_LAPTOP_BACKUP\DOCUMENTS\GitHub\LoxLang\test.lox" -gs "var GBL_BASE_NAT_LOG = 2.71828;" -gf "C:\FILES\OIT_LAPTOP_BACKUP\DOCUMENTS\GitHub\LoxLang\globals.lox"
 
 CsLox -u https://localhost:7109/getScript -gs "var GBL_BASE_NAT_LOG = 2.71828;" -gf "C:\FILES\OIT_LAPTOP_BACKUP\DOCUMENTS\GitHub\LoxLang\globals.lox" -gu https://localhost:7109/getGlobal -ru https://localhost:7109/setAnswer -gv urlGlobal
+
+JavaLox -f "C:\FILES\OIT_LAPTOP_BACKUP\DOCUMENTS\GitHub\LoxLang\test.lox" -gs "var GBL_BASE_NAT_LOG = 2.71828;" -gf "C:\FILES\OIT_LAPTOP_BACKUP\DOCUMENTS\GitHub\LoxLang\globals.lox"
+
+JavaLox -u https://localhost:7109/getScript -gs "var GBL_BASE_NAT_LOG = 2.71828;" -gf "C:\FILES\OIT_LAPTOP_BACKUP\DOCUMENTS\GitHub\LoxLang\globals.lox" -gu https://localhost:7109/getGlobal -ru https://localhost:7109/setAnswer -gv urlGlobal
 </pre>
 
 ## Testing URL Functionality
