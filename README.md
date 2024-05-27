@@ -14,6 +14,9 @@ This implementation of Lox doesn't support many extended features. The language 
 6. Support for multi-line comments with nested multi-line comments.
 7. Support for a generic, easily extensible function called "sys" that's first argument is a string indicating what code to run. Used as a quick an easy way to integrate the Lox interpreter into an application environment.
 8. Arbitrary number of function arguments via special handling of an arity value of -1.
+9. Support for retrieving the script to execute from a URL.
+10. Support for retrieving a globals script to run from a URL.
+11. Support for returning a global variable after script execution to a URL.
 
 # Developers
 Victor G. Brusca
@@ -23,19 +26,32 @@ Victor G. Brusca
 An example of the CLI arguments are as follows:
 
 <pre>
-Usage: [JavaLox | CsLox] ([-f script file] | [-s script string] | [-p REPL]) & [-gf script file] [-gs script string]
+Usage: JavaLox  ([-f script file] | [-s script string] | [-u script url] | [-p REPL]) & [-gf script file] [-gs script string] [-gu script url] [-ru url] [-gv global variable name to respond with]
 
 Where:
 -f = Run a Lox script.
 -s = Run a Lox program in a string.
 -p = Runs a Lox REPL.
+-u = Runs a script from a URL, expect a script JSON = { "script":"some Lox code here" }.
 -gf = A Lox file script to process, loading globals, before running the intended script.
--gs = A Lox string script to process, loading globals, before running the intended script.   
+-gs = A Lox string script to process, loading globals, before running the intended script.
+-gu = A Lox URL script to process, loading globals, before running the intended script, expect a script JSON = { "script":"some Lox code here" }.
+-ru = A URL to send a execution response message to.
+-gv = The global variable to return after script execution, doesn't support Objects.
 </pre>
 
 ## Example CLI Call
 <pre>
-CsLox -f "C:\FILES\DOCUMENTS\GitHub\LoxLang\test.lox" -gs "var GBL_BASE_NAT_LOG = 2.71828;" -gf "C:\FILES\DOCUMENTS\GitHub\LoxLang\globals.lox"
+CsLox -f "C:\FILES\OIT_LAPTOP_BACKUP\DOCUMENTS\GitHub\LoxLang\test.lox" -gs "var GBL_BASE_NAT_LOG = 2.71828;" -gf "C:\FILES\OIT_LAPTOP_BACKUP\DOCUMENTS\GitHub\LoxLang\globals.lox"
+
+CsLox -u https://localhost:7109/getScript -gs "var GBL_BASE_NAT_LOG = 2.71828;" -gf "C:\FILES\OIT_LAPTOP_BACKUP\DOCUMENTS\GitHub\LoxLang\globals.lox" -gu https://localhost:7109/getGlobal -ru https://localhost:7109/setAnswer -gv urlGlobal
+</pre>
+
+## Testing URL Functionality
+You can test URL functionality by using the CsLoxTestServer project, Visual Studio, and either Lox interpretter. You'll have to add a certificate to the JRE by using a command similar to this run as administrator in the current JRE bin dir.
+
+<pre>
+keytool -import -trustcacerts -alias LOX_LOCAL -file "C:\Users\brusc\Downloads\localhost.pem | .cer" -keystore "C:\Program Files\Java\jdk-21\lib\security\cacerts" -storepass LOX_LOCAL            
 </pre>
 
 # Errata
