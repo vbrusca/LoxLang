@@ -9,100 +9,104 @@ import java.util.Map;
  */
 class Environment {
 
-   /**
-    *
-    */
-   final Environment enclosing;
+    /**
+     *
+     */
+    final Environment enclosing;
 
-   /**
-    *
-    */
-   private final Map<String, Object> values = new HashMap<>();
+    /**
+     *
+     */
+    private final Map<String, Object> values = new HashMap<>();
 
-   /**
-    *
-    */
-   Environment() {
-      enclosing = null;
-   }
+    /**
+     *
+     */
+    Environment() {
+        enclosing = null;
+    }
 
-   /**
-    *
-    * @param enclosing
-    */
-   Environment(Environment enclosing) {
-      this.enclosing = enclosing;
-   }
+    public HashMap<String, Object> getValues() {
+        return new HashMap<>(values);
+    }
 
-   /**
-    *
-    * @param name
-    * @return
-    */
-   Object get(Token name) {
-      if (values.containsKey(name.lexeme)) {
-         return values.get(name.lexeme);
-      }
+    /**
+     *
+     * @param enclosing
+     */
+    Environment(Environment enclosing) {
+        this.enclosing = enclosing;
+    }
 
-      if (enclosing != null) {
-         return enclosing.get(name);
-      }
+    /**
+     *
+     * @param name
+     * @return
+     */
+    Object get(Token name) {
+        if (values.containsKey(name.lexeme)) {
+            return values.get(name.lexeme);
+        }
 
-      throw new RuntimeError(name, "Undefined variable '" + name.lexeme + "'.");
-   }
+        if (enclosing != null) {
+            return enclosing.get(name);
+        }
 
-   /**
-    *
-    * @param name
-    * @param value
-    */
-   void assign(Token name, Object value) {
-      if (values.containsKey(name.lexeme)) {
-         values.put(name.lexeme, value);
-         return;
-      }
+        throw new RuntimeError(name, "Undefined variable '" + name.lexeme + "'.");
+    }
 
-      if (enclosing != null) {
-         enclosing.assign(name, value);
-         return;
-      }
+    /**
+     *
+     * @param name
+     * @param value
+     */
+    void assign(Token name, Object value) {
+        if (values.containsKey(name.lexeme)) {
+            values.put(name.lexeme, value);
+            return;
+        }
 
-      throw new RuntimeError(name, "Undefined variable '" + name.lexeme + "'.");
-   }
+        if (enclosing != null) {
+            enclosing.assign(name, value);
+            return;
+        }
 
-   /**
-    *
-    * @param name
-    * @param value
-    */
-   void define(String name, Object value) {
-      //Lox.log(0, "Environment.define: " + name + ", '" + value + "'");      
-      values.put(name, value);
-   }
+        throw new RuntimeError(name, "Undefined variable '" + name.lexeme + "'.");
+    }
 
-   Environment ancestor(int distance) {
-      Environment environment = this;
-      for (int i = 0; i < distance; i++) {
-         environment = environment.enclosing;
-      }
+    /**
+     *
+     * @param name
+     * @param value
+     */
+    void define(String name, Object value) {
+        //Lox.log(0, "Environment.define: " + name + ", '" + value + "'");      
+        values.put(name, value);
+    }
 
-      return environment;
-   }
+    Environment ancestor(int distance) {
+        Environment environment = this;
+        for (int i = 0; i < distance; i++) {
+            environment = environment.enclosing;
+        }
 
-   Object getAt(int distance, String name) {
-      //Lox.log(0, "Environment.getAt: " + distance + ", '" + name + "'");
-      Environment env = ancestor(distance);
-      if (env != null && env.values != null && env.values.containsKey(name)) {
-         //Lox.log(0, "Environment.getAt: AAA: '" + env.values.get(name) + "'");
-         return env.values.get(name);
-      } else {
-         //Lox.log(0, "Environment.getAt: BBB: '" + null + "'");         
-         return null;
-      }
-   }
+        return environment;
+    }
 
-   void assignAt(int distance, Token name, Object value) {
-      //Lox.log(0, "Environment.assignAt: " + distance + ", '" + name.lexeme + "', '" + value + "'");
-      ancestor(distance).values.put(name.lexeme, value);
-   }
+    Object getAt(int distance, String name) {
+        //Lox.log(0, "Environment.getAt: " + distance + ", '" + name + "'");
+        Environment env = ancestor(distance);
+        if (env != null && env.values != null && env.values.containsKey(name)) {
+            //Lox.log(0, "Environment.getAt: AAA: '" + env.values.get(name) + "'");
+            return env.values.get(name);
+        } else {
+            //Lox.log(0, "Environment.getAt: BBB: '" + null + "'");         
+            return null;
+        }
+    }
+
+    void assignAt(int distance, Token name, Object value) {
+        //Lox.log(0, "Environment.assignAt: " + distance + ", '" + name.lexeme + "', '" + value + "'");
+        ancestor(distance).values.put(name.lexeme, value);
+    }
 }

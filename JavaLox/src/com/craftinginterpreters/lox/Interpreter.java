@@ -362,7 +362,7 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Object> {
     */
    private String stringify(Object obj) {
       if (obj == null) {
-         return "nil";
+         return "null"; //"nil";
       }
 
       if (obj instanceof Double) {
@@ -396,6 +396,9 @@ public class Interpreter implements Expr.Visitor<Object>, Stmt.Visitor<Object> {
    public Object visitPrintStmt(Stmt.Print stmt) {
       Object value = evaluate(stmt.expression);
       String str = stringify(value);
+      if (value instanceof Boolean || (value != null && value.getClass() != null && value.getClass().getName().equals("Boolean"))) {
+         str = str.toLowerCase();
+      }      
       System.out.println(str);
       return null;
    }

@@ -138,3 +138,6 @@ dct.set(2, "test");
 print dct.length;
 print dct.get(2);
 print dct.get("hello");
+
+var nnnn = null;
+print nnnn;

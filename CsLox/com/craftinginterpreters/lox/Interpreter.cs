@@ -368,7 +368,7 @@ namespace com.craftinginterpreters.lox
         /// <returns></returns>
         private String stringify(Object obj)
         {
-            if (obj == null) return "nil";
+            if (obj == null) return "null"; //"nil";
 
             if (obj is Double || obj is double) {
                 String text = obj.ToString();
@@ -392,6 +392,10 @@ namespace com.craftinginterpreters.lox
         {
             Object value = evaluate(stmt.expression);
             String str = stringify(value);
+            if (value is bool || value is Boolean || (value != null && value.GetType() != null && value.GetType().Name == "Boolean"))
+            {
+                str = str.ToLower();
+            }
             System.Diagnostics.Debug.WriteLine(str);
             System.Console.Out.WriteLine(str);
             return null;

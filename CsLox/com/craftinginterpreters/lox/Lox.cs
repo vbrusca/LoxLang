@@ -54,166 +54,173 @@ namespace com.craftinginterpreters.lox
         /// <param name="args"></param>
         public static void Main(String[] args)
         {
-            /*
-            String url = "";
-            List<NameValuePair> data = new List<NameValuePair>();
-            data.Add(new BasicNameValuePair("answer", "hello"));
-
-            url = "http://localhost:5223/getGlobal";
-            Lox.log(0, "Calling getBlank URL = '" + url + "', Response = \n" + getBlank(url));
-
-            url = "https://localhost:7109/getGlobal";
-            Lox.log(0, "Calling getBlank URL = '" + url + "', Response = \n" +  getBlank(url));
-
-            url = "http://localhost:5223/getGlobal";
-            Lox.log(0, "Calling getQueryParams URL = '" + url + "', Response = \n" + getQueryParams(url, data));
-
-            url = "https://localhost:7109/getGlobal";
-            Lox.log(0, "Calling getQueryParams URL = '" + url + "', Response = \n" + getQueryParams(url, data));
-
-            url = "http://localhost:5223/getGlobal";
-            Lox.log(0, "Calling post URL = '" + url + "', Response = \n" + post(url, data));
-
-            url = "https://localhost:7109/getGlobal";
-            Lox.log(0, "Calling post URL = '" + url + "', Response = \n" + post(url, data));
-
-            url = "http://localhost:5223/getScript";
-            Lox.log(0, "Calling getBlank URL = '" + url + "', Response = \n" + getBlank(url));
-
-            url = "https://localhost:7109/getScript";
-            Lox.log(0, "Calling getBlank URL = '" + url + "', Response = \n" + getBlank(url));
-
-            url = "http://localhost:5223/getScript";
-            Lox.log(0, "Calling getQueryParams URL = '" + url + "', Response = \n" + getQueryParams(url, data));
-
-            url = "https://localhost:7109/getScript";
-            Lox.log(0, "Calling getQueryParams URL = '" + url + "', Response = \n" + getQueryParams(url, data));
-
-            url = "http://localhost:5223/getScript";
-            Lox.log(0, "Calling post URL = '" + url + "', Response = \n" + post(url, data));
-
-            url = "https://localhost:7109/getScript";
-            Lox.log(0, "Calling post URL = '" + url + "', Response = \n" + post(url, data));
-
-            url = "http://localhost:5223/setAnswer";
-            Lox.log(0, "Calling getQueryParams URL = '" + url + "', Response = \n" + getQueryParams(url, data));
-
-            url = "https://localhost:7109/setAnswer";
-            Lox.log(0, "Calling getQueryParams URL = '" + url + "', Response = \n" + getQueryParams(url, data));
-
-            url = "http://localhost:5223/setAnswer";
-            Lox.log(0, "Calling post URL = '" + url + "', Response = \n" + post(url, data));
-
-            url = "https://localhost:7109/setAnswer";
-            Lox.log(0, "Calling post URL = '" + url + "', Response = \n" + post(url, data));
-
-            return;
-            */
-
-            hasGlobalsFile = false;
-            hasGlobalsScript = false;
-            for (int i = 0; i < args.Length; i++)
+            bool runUrlTest = false;
+            if (runUrlTest)
             {
-                if (args[i] != null && args[i].Equals("-gf"))
-                {
-                    if (i + 1 < args.Length)
-                    {
-                        globalsFile = args[i + 1];
-                        hasGlobalsFile = true;
-                    }
-                }
-                else if (args[i] != null && args[i].Equals("-gs"))
-                {
-                    if (i + 1 < args.Length)
-                    {
-                        globalsScript = args[i + 1];
-                        hasGlobalsScript = true;
-                    }
-                }
-                else if (args[i] != null && args[i].Equals("-gu"))
-                {
-                    if (i + 1 < args.Length)
-                    {
-                        globalsUrl = args[i + 1];
-                        hasGlobalsUrl = true;
-                    }
-                }
-                else if (args[i] != null && args[i].Equals("-ru"))
-                {
-                    if (i + 1 < args.Length)
-                    {
-                        returnUrl = args[i + 1];
-                        hasReturnUrl = true;
-                    }
-                }
-                else if (args[i] != null && args[i].Equals("-gv"))
-                {
-                    if (i + 1 < args.Length)
-                    {
-                        returnUrlGlobalVarName = args[i + 1];
-                    }
-                }
-            }
+                /*
+                Accept the Certs for test site.
+                 */ 
 
-            if (hasGlobalsFile)
-            {
-                Lox.log(0, "Found global file to import: " + globalsFile);
-                runFile(globalsFile);
-            }
+                String url = "";
+                List<NameValuePair> data = new List<NameValuePair>();
+                data.Add(new BasicNameValuePair("answer", "hello"));
 
-            if (hasGlobalsScript)
-            {
-                Lox.log(0, "Found global script to import: " + globalsScript);
-                run(globalsScript);
-            }
+                url = "http://localhost:5223/getGlobal";
+                Lox.log(0, "Calling getBlank URL = '" + url + "', Response = \n" + getBlank(url));
 
-            if(hasGlobalsUrl)
-            {
-                Lox.log(0, "Found global script to import: " + globalsUrl);
-                runUrl(globalsUrl, UrlConnType.GET_BLANK, null);
-            }
+                url = "https://localhost:7109/getGlobal";
+                Lox.log(0, "Calling getBlank URL = '" + url + "', Response = \n" + getBlank(url));
 
-            if (args.Length >= 1 && args[0] != null && args[0].ToLower().Equals("-p"))
-            {
-                runPrompt();
-            }
-            else if (args.Length >= 2 && args[0] != null && args[0].ToLower().Equals("-f") && args[1] != null)
-            {
-                runFile(args[1]);
-            }
-            else if (args.Length >= 2 && args[0] != null && args[0].ToLower().Equals("-s") && args[1] != null)
-            {
-                run(args[1]);
-            }
-            else if (args.Length >= 2 && args[0] != null && args[0].ToLower().Equals("-u") && args[1] != null)
-            {
-                runUrl(args[1], UrlConnType.GET_BLANK, null);
+                url = "http://localhost:5223/getGlobal";
+                Lox.log(0, "Calling getQueryParams URL = '" + url + "', Response = \n" + getQueryParams(url, data));
+
+                url = "https://localhost:7109/getGlobal";
+                Lox.log(0, "Calling getQueryParams URL = '" + url + "', Response = \n" + getQueryParams(url, data));
+
+                url = "http://localhost:5223/getGlobal";
+                Lox.log(0, "Calling post URL = '" + url + "', Response = \n" + post(url, data));
+
+                url = "https://localhost:7109/getGlobal";
+                Lox.log(0, "Calling post URL = '" + url + "', Response = \n" + post(url, data));
+
+                url = "http://localhost:5223/getScript";
+                Lox.log(0, "Calling getBlank URL = '" + url + "', Response = \n" + getBlank(url));
+
+                url = "https://localhost:7109/getScript";
+                Lox.log(0, "Calling getBlank URL = '" + url + "', Response = \n" + getBlank(url));
+
+                url = "http://localhost:5223/getScript";
+                Lox.log(0, "Calling getQueryParams URL = '" + url + "', Response = \n" + getQueryParams(url, data));
+
+                url = "https://localhost:7109/getScript";
+                Lox.log(0, "Calling getQueryParams URL = '" + url + "', Response = \n" + getQueryParams(url, data));
+
+                url = "http://localhost:5223/getScript";
+                Lox.log(0, "Calling post URL = '" + url + "', Response = \n" + post(url, data));
+
+                url = "https://localhost:7109/getScript";
+                Lox.log(0, "Calling post URL = '" + url + "', Response = \n" + post(url, data));
+
+                url = "http://localhost:5223/setAnswer";
+                Lox.log(0, "Calling getQueryParams URL = '" + url + "', Response = \n" + getQueryParams(url, data));
+
+                url = "https://localhost:7109/setAnswer";
+                Lox.log(0, "Calling getQueryParams URL = '" + url + "', Response = \n" + getQueryParams(url, data));
+
+                url = "http://localhost:5223/setAnswer";
+                Lox.log(0, "Calling post URL = '" + url + "', Response = \n" + post(url, data));
+
+                url = "https://localhost:7109/setAnswer";
+                Lox.log(0, "Calling post URL = '" + url + "', Response = \n" + post(url, data));
             }
             else
             {
-                /*
-                    -f "C:\FILES\OIT_LAPTOP_BACKUP\DOCUMENTS\GitHub\LoxLang\test.lox" 
-                    -gs "var GBL_BASE_NAT_LOG = 2.71828;" 
-                    -gf "C:\FILES\OIT_LAPTOP_BACKUP\DOCUMENTS\GitHub\LoxLang\globals.lox"
-                */
-                // -gs "var GBL_BASE_NAT_LOG = 2.71828;" -gf "C:\FILES\OIT_LAPTOP_BACKUP\DOCUMENTS\GitHub\LoxLang\globals.lox" -gu https://localhost:7109/getGlobal -u https://localhost:7109/getScript -ru https://localhost:7109/setAnswer -gv urlGlobal
-                //-gu https://localhost:7109/getGlobal -u https://localhost:7109/getScript -ru https://localhost:7109/setAnswer -gv urlGlobal
-                String str = "Usage: CsLox  ([-f script file] | [-s script string] | [-u script url] | [-p REPL]) & [-gf script file] [-gs script string] [-gu script url] [-ru url] [-gv global variable name to respond with]";
-                System.Diagnostics.Debug.WriteLine(str);
-                System.Console.Out.WriteLine(str);
-                System.Environment.Exit(64);
-            }
-
-            if(hasReturnUrl)
-            {
-                Dictionary<String, Object> values = interpreter.globals.getValues();
-                if (values.ContainsKey(returnUrlGlobalVarName))
+                hasGlobalsFile = false;
+                hasGlobalsScript = false;
+                for (int i = 0; i < args.Length; i++)
                 {
-                    String value = (values[returnUrlGlobalVarName] + "");
-                    List<NameValuePair> data = new List<NameValuePair>();
-                    data.Add(new BasicNameValuePair("answer", value));
-                    data.Add(new BasicNameValuePair("variableName", returnUrlGlobalVarName));
-                    Lox.log(0, "Return URL Response: '" + getQueryParams(returnUrl, data) + "'");
+                    if (args[i] != null && args[i].Equals("-gf"))
+                    {
+                        if (i + 1 < args.Length)
+                        {
+                            globalsFile = args[i + 1];
+                            hasGlobalsFile = true;
+                        }
+                    }
+                    else if (args[i] != null && args[i].Equals("-gs"))
+                    {
+                        if (i + 1 < args.Length)
+                        {
+                            globalsScript = args[i + 1];
+                            hasGlobalsScript = true;
+                        }
+                    }
+                    else if (args[i] != null && args[i].Equals("-gu"))
+                    {
+                        if (i + 1 < args.Length)
+                        {
+                            globalsUrl = args[i + 1];
+                            hasGlobalsUrl = true;
+                        }
+                    }
+                    else if (args[i] != null && args[i].Equals("-ru"))
+                    {
+                        if (i + 1 < args.Length)
+                        {
+                            returnUrl = args[i + 1];
+                            hasReturnUrl = true;
+                        }
+                    }
+                    else if (args[i] != null && args[i].Equals("-gv"))
+                    {
+                        if (i + 1 < args.Length)
+                        {
+                            returnUrlGlobalVarName = args[i + 1];
+                        }
+                    }
+                }
+
+                if (hasGlobalsFile)
+                {
+                    Lox.log(0, "Found global file to import: " + globalsFile);
+                    runFile(globalsFile);
+                }
+
+                if (hasGlobalsScript)
+                {
+                    Lox.log(0, "Found global script to import: " + globalsScript);
+                    run(globalsScript);
+                }
+
+                if (hasGlobalsUrl)
+                {
+                    Lox.log(0, "Found global script to import: " + globalsUrl);
+                    runUrl(globalsUrl, UrlConnType.GET_BLANK, null);
+                }
+
+                if (args.Length >= 1 && args[0] != null && args[0].ToLower().Equals("-p"))
+                {
+                    runPrompt();
+                }
+                else if (args.Length >= 2 && args[0] != null && args[0].ToLower().Equals("-f") && args[1] != null)
+                {
+                    runFile(args[1]);
+                }
+                else if (args.Length >= 2 && args[0] != null && args[0].ToLower().Equals("-s") && args[1] != null)
+                {
+                    run(args[1]);
+                }
+                else if (args.Length >= 2 && args[0] != null && args[0].ToLower().Equals("-u") && args[1] != null)
+                {
+                    runUrl(args[1], UrlConnType.GET_BLANK, null);
+                }
+                else
+                {
+                    /*
+                    -f "C:\FILES\OIT_LAPTOP_BACKUP\DOCUMENTS\GitHub\LoxLang\test.lox" -gs "var GBL_BASE_NAT_LOG = 2.71828;" -gf "C:\FILES\OIT_LAPTOP_BACKUP\DOCUMENTS\GitHub\LoxLang\globals.lox"
+                    -u https://localhost:7109/getScript -gs "var GBL_BASE_NAT_LOG = 2.71828;" -gf "C:\FILES\OIT_LAPTOP_BACKUP\DOCUMENTS\GitHub\LoxLang\globals.lox" -gu https://localhost:7109/getGlobal -ru https://localhost:7109/setAnswer -gv urlGlobal
+                    */
+                    String str = "Usage: CsLox  ([-f script file] | [-s script string] | [-u script url] | [-p REPL]) & [-gf script file] [-gs script string] [-gu script url] [-ru url] [-gv global variable name to respond with]";
+                    System.Diagnostics.Debug.WriteLine(str);
+                    System.Console.Out.WriteLine(str);
+                    System.Environment.Exit(64);
+                }
+
+                if (hasReturnUrl)
+                {
+                    Dictionary<String, Object> values = interpreter.globals.getValues();
+                    if (values.ContainsKey(returnUrlGlobalVarName))
+                    {
+                        Object obj = values[returnUrlGlobalVarName];
+                        String value = (obj + "");
+                        if (obj is bool || obj is Boolean || obj.GetType().Name == "Boolean") {
+                            value = value.ToLower();
+                        }
+                        List<NameValuePair> data = new List<NameValuePair>();
+                        data.Add(new BasicNameValuePair("answer", value));
+                        data.Add(new BasicNameValuePair("variableName", returnUrlGlobalVarName));
+                        Lox.log(0, "Return URL Response: '" + getQueryParams(returnUrl, data) + "'");
+                    }
                 }
             }
         }
@@ -277,7 +284,6 @@ namespace com.craftinginterpreters.lox
             }
             FormUrlEncodedContent content = new FormUrlEncodedContent(values);
             HttpResponseMessage response = await client.PostAsync(url, content);
-            Lox.log(0, "ResponseCode: " + response.IsSuccessStatusCode);
             return await response.Content.ReadAsStringAsync();
         }
 
