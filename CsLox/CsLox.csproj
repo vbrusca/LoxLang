@@ -85,7 +85,7 @@
     <Compile Include="com\craftinginterpreters\lox\Settings.cs" />
     <Compile Include="com\craftinginterpreters\lox\Stmt.cs" />
     <Compile Include="com\craftinginterpreters\tool\GenerateAst.cs" />
-    <Compile Include="LoxInstance.cs" />
+    <Compile Include="com\craftinginterpreters\lox\LoxInstance.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="com\craftinginterpreters\lox\Scanner.cs" />
     <Compile Include="com\craftinginterpreters\lox\Token.cs" />
