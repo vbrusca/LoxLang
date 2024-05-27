@@ -36,8 +36,12 @@
     <StartupObject>com.craftinginterpreters.lox.Lox</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -47,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="com\craftinginterpreters\lox\Array.cs" />
+    <Compile Include="com\craftinginterpreters\lox\BasicNameValuePair.cs" />
     <Compile Include="com\craftinginterpreters\lox\Clock.cs" />
     <Compile Include="com\craftinginterpreters\lox\Dict.cs" />
     <Compile Include="com\craftinginterpreters\lox\Environment.cs" />
@@ -56,6 +61,7 @@
     <Compile Include="com\craftinginterpreters\lox\HandleLoxCallables.cs" />
     <Compile Include="com\craftinginterpreters\lox\HandleLoxGlobals.cs" />
     <Compile Include="com\craftinginterpreters\lox\Interpreter.cs" />
+    <Compile Include="com\craftinginterpreters\lox\JsonScript.cs" />
     <Compile Include="com\craftinginterpreters\lox\LinkedList.cs" />
     <Compile Include="com\craftinginterpreters\lox\LoxDict.cs" />
     <Compile Include="com\craftinginterpreters\lox\LoxLinkedListAdd.cs" />
@@ -71,6 +77,7 @@
     <Compile Include="com\craftinginterpreters\lox\LoxClass.cs" />
     <Compile Include="com\craftinginterpreters\lox\LoxFunction.cs" />
     <Compile Include="com\craftinginterpreters\lox\LoxLinkedList.cs" />
+    <Compile Include="com\craftinginterpreters\lox\NameValuePair.cs" />
     <Compile Include="com\craftinginterpreters\lox\Parser.cs" />
     <Compile Include="com\craftinginterpreters\lox\Resolver.cs" />
     <Compile Include="com\craftinginterpreters\lox\Return.cs" />
@@ -86,6 +93,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

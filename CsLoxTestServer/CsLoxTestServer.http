@@ -1,0 +1,6 @@
+@CsLoxTestServer_HostAddress = http://localhost:5223
+
+GET {{CsLoxTestServer_HostAddress}}/getGlobal
+Accept: application/json
+
+###

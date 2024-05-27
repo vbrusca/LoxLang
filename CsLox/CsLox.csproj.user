@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
-    <StartArguments>-f "C:\FILES\DOCUMENTS\GitHub\LoxLang\test.lox" -gs "var GBL_BASE_NAT_LOG = 2.71828%3b" -gf "C:\FILES\DOCUMENTS\GitHub\LoxLang\globals.lox"</StartArguments>
+    <StartArguments>-u https://localhost:7109/getScript -gs "var GBL_BASE_NAT_LOG = 2.71828%3b" -gf "C:\FILES\OIT_LAPTOP_BACKUP\DOCUMENTS\GitHub\LoxLang\globals.lox" -gu https://localhost:7109/getGlobal -ru https://localhost:7109/setAnswer -gv urlGlobal</StartArguments>
   </PropertyGroup>
 </Project>

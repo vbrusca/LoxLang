@@ -29,6 +29,11 @@ namespace com.craftinginterpreters.lox
             enclosing = null;
         }
 
+        public Dictionary<String, Object> getValues()
+        {
+            return new Dictionary<String, Object>(values);
+        }
+
         /// <summary>
         /// 
         /// </summary>

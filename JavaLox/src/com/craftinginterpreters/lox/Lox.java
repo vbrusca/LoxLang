@@ -121,15 +121,8 @@ public class Lox {
       String resultContent = null;
       HttpGet httpGet = new HttpGet(url);
 
-      //List<NameValuePair> nvps = new ArrayList<>();
-      // GET Query Parameters
-      //nvps.add(new BasicNameValuePair("username", "wdbyte.com"));
-      //nvps.add(new BasicNameValuePair("password", "secret"));
-      // Add to the request URL
       try {
-         URI uri = new URIBuilder(new URI(url))
-                 .addParameters(nvps)
-                 .build();
+         URI uri = new URIBuilder(new URI(url)).addParameters(nvps).build();
          httpGet.setUri(uri);
       } catch (URISyntaxException e) {
          throw new RuntimeException(e);
@@ -137,12 +130,10 @@ public class Lox {
 
       try (CloseableHttpClient httpclient = HttpClients.createDefault()) {
          try (CloseableHttpResponse response = httpclient.execute(httpGet)) {
-
             System.out.println(response.getVersion()); // HTTP/1.1
             System.out.println(response.getCode()); // 200
             System.out.println(response.getReasonPhrase()); // OK
             HttpEntity entity = response.getEntity();
-
             resultContent = EntityUtils.toString(entity);
          }
       } catch (IOException | ParseException e) {
@@ -154,10 +145,6 @@ public class Lox {
    public static String post(String url, List<NameValuePair> nvps) {
       String result = null;
       HttpPost httpPost = new HttpPost(url);
-      // form parameters.
-      //List<NameValuePair> nvps = new ArrayList<>();
-      //nvps.add(new BasicNameValuePair("username", "wdbyte.com"));
-      //nvps.add(new BasicNameValuePair("password", "secret"));
       httpPost.setEntity(new UrlEncodedFormEntity(nvps));
       try (CloseableHttpClient httpclient = HttpClients.createDefault()) {
          try (CloseableHttpResponse response = httpclient.execute(httpPost)) {
