@@ -54,7 +54,7 @@ JavaLox -u https://localhost:7109/getScript -gs "var GBL_BASE_NAT_LOG = 2.71828;
 </pre>
 
 ## Testing URL Functionality
-You can test URL functionality by using the CsLoxTestServer project, Visual Studio, and either Lox interpretter. You'll have to add a certificate to the JRE by using a command similar to this run as administrator in the current JRE bin dir.
+You can test URL functionality by using the CsLoxTestServer project, Visual Studio, and either Lox interpretter. For the Java version you'll have to add a certificate to the JRE by using a command similar to this run as administrator in the current JRE bin dir. I renamed the .pem file downloadable from the browser into a .cer and it worked fine. For the C# version you'll be prompted to add the necessary certificates if you run it in Visual Studio.
 
 <pre>
 keytool -import -trustcacerts -alias LOX_LOCAL -file "C:\Users\brusc\Downloads\localhost.pem | .cer" -keystore "C:\Program Files\Java\jdk-21\lib\security\cacerts" -storepass LOX_LOCAL            
