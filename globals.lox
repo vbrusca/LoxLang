@@ -1,5 +1,5 @@
 
-//-g C:\FILES\DOCUMENTS\GitHub\LoxLang\globals.lox
+//-gf C:\FILES\DOCUMENTS\GitHub\LoxLang\globals.lox
 
 var GBL_NEG_ONE = 			-1.0;
 var GBL_ZERO = 				0.0;
