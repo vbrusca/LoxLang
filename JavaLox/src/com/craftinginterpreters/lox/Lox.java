@@ -34,15 +34,26 @@ import org.apache.hc.core5.net.URIBuilder;
  * @author Victor G. Brusca, Carlo Bruscani, based on the work of Robert
  * Nystrom, Copyright Middlemind Games 05/03/2024
  */
-public class Lox {
 
+class TestLoxCallable implements HandleLoxCallables
+{
+    @Override
+    public Object call(int arity, Interpreter interpreter, List<Object> arguments) {
+        System.out.println("Custom function handler for sys arg0 of '" + arguments.get(0) + "' with arg1 of '" + arguments.get(1) + "'.");
+        return null;
+    }
+}    
+
+public class Lox {    
     public enum UrlConnType {
         GET_BLANK,
         GET_QUERY_PARAMS,
         POST
     }
 
-    private static final Interpreter interpreter = new Interpreter();
+    @SuppressWarnings("Convert2Diamond")
+    public static HashMap<Object, HandleLoxCallables> handleCalls = new HashMap<Object, HandleLoxCallables> ();
+    private static final Interpreter interpreter = new Interpreter(handleCalls);
     static boolean hadError = false;
     static boolean hadRuntimeError = false;
     static String lastError = null;
@@ -69,6 +80,9 @@ public class Lox {
      * @throws IOException
      */
     public static void main(String[] args) throws IOException {
+
+        handleCalls.put("test", new TestLoxCallable());
+        
         boolean runUrlTest = false;
         if (runUrlTest) {
             /*

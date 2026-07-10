@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CsLoxTestServer")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0959c42658f5c8f52f821ae6d2adba5dc9fa1c07")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+986621bb8a23b5fc5e7d98402822d72092a71863")]
 [assembly: System.Reflection.AssemblyProductAttribute("CsLoxTestServer")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CsLoxTestServer")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -12,6 +12,15 @@ using System.Security.Policy;
 
 namespace com.craftinginterpreters.lox
 {
+    class TestLoxCallable : HandleLoxCallables
+    {
+        object HandleLoxCallables.call(int arity, Interpreter interpreter, List<object> arguments)
+        {
+            System.Console.Out.WriteLine("Custom function handler for sys arg0 of '" + arguments[0] + "' with arg1 of '" + arguments[1] + "'.");
+            return null;
+        }
+    }
+
     /// <summary>
     /// An implementation of the "Lox" embedded scripting language.
     /// This work was created from tutorials by the original author, Robert Nystrom.
@@ -28,7 +37,8 @@ namespace com.craftinginterpreters.lox
             GET_QUERY_PARAMS
         }
 
-        private static readonly Interpreter interpreter = new Interpreter();
+        private static Dictionary<Object, HandleLoxCallables> handleCalls = new Dictionary<object, HandleLoxCallables> ();
+        private static readonly Interpreter interpreter = new Interpreter(handleCalls);
         internal static bool hadError = false;
         internal static bool hadRuntimeError = false;
         internal static String lastError = null;
@@ -54,6 +64,8 @@ namespace com.craftinginterpreters.lox
         /// <param name="args"></param>
         public static void Main(String[] args)
         {
+            handleCalls.Add("test", new TestLoxCallable());
+
             bool runUrlTest = false;
             if (runUrlTest)
             {
