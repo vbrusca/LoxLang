@@ -75,6 +75,9 @@ app.MapPost("/setAnswer", (HttpRequest request) =>
 });
 </pre>
 
+The actual test server code in visual studio.
+![Alt Text](images/csl_tx_sc1.png)
+
 ## Example CLI Calls
 The HTTP server and port number are dependent on how you have the included visual studio project configured.
 <pre>
@@ -90,14 +93,31 @@ java -jar JavaLox.jar -u https://localhost:7109/getScript -gs "var GBL_BASE_NAT_
 ## Testing URL Functionality
 You can test URL functionality by using the CsLoxTestServer project, Visual Studio, and either Lox interpretter. For the Java version you'll have to add a certificate to the JRE by using a command similar to this run as administrator in the current JRE bin dir. I renamed the .pem file downloadable from the browser into a .cer and it worked fine. For the C# version you'll be prompted to add the necessary certificates if you run it in Visual Studio.
 
+Visual Studio prompts you to setup the SSL certificate, but will go on without you and launch an http version of the test server if you take too long to answer.
+![Alt Text](images/csl_tx_sc2.png)
+
+![Alt Text](images/csl_tx_sc3.png)
+
+Once the server is up you can quickly test it with CsLox.eve with no futher configuration.
+![Alt Text](images/csl_tx_sc4.png)
+
+PEM file download for use with java's keytool. Make sure you install it with the same version of java that you use to run JavaLox.jar.
+![Alt Text](images/csl_tx_sc5.png)
+
+Rename the certificate if need be.
+![Alt Text](images/csl_tx_sc6.png)
+
 <pre>
 keytool -import -trustcacerts -alias LOX_LOCAL -file "C:\Users\brusc\Downloads\localhost.pem | .cer" -keystore "C:\Program Files\Java\jdk-21\lib\security\cacerts" -storepass LOX_LOCAL            
 </pre>
 
-Running it on a Windows box in Powershell with Administrator privs looks like so. In this case the .cer is a renamed .pem from the Visual Studio CsLoxTestServer project.
+Running it on a Windows box in Powershell with Administrator privs looks like so. In this case the .cer is a renamed .pem from the Visual Studio CsLoxTestServer project. Make sure you install it with the same version of java that you use to run JavaLox.jar.
 <pre>
  &"C:\Program Files\Java\jdk-26\bin\keytool.exe" -import -trustcacerts -alias LOX_LOCAL -file "C:\Users\brusc\Downloads\localhost.cer" -keystore "C:\Program Files\Java\jdk-26\lib\security\cacerts" -storepass LOX_LOCAL   
 </pre>
+
+Now you can run the java URL tests against the CsLoxTestServer.
+![Alt Text](images/csl_tx_sc7.png)
 
 ## Example Output from a URL Test
 Compare to the HTTP function output above.<br>
@@ -125,6 +145,10 @@ OK
 [line 0] Log: Return URL Response: '{ "msg":"Found answer: 'false, urlGlobal'" }'
 BUILD SUCCESSFUL (total time: 1 second)   
 </pre>
+
+![Alt Text](images/csl_tx_sc8.png)
+
+![Alt Text](images/csl_tx_sc9.png)
 
 # Errata
 <ul>
