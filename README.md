@@ -28,7 +28,7 @@ Victor G. Brusca
 An example of the CLI arguments are as follows:
 
 <pre>
-Usage: JavaLox  ([-f script file] | [-s script string] | [-u script url] | [-p REPL]) & [-gf script file] [-gs script string] [-gu script url] [-ru url] [-gv global variable name to respond with]
+Usage: java -jar JavaLox.jar or CsLox.exe  ([-f script file] | [-s script string] | [-u script url] | [-p REPL]) & [-gf script file] [-gs script string] [-gu script url] [-ru url] [-gv global variable name to respond with]
 
 Where:
 -f = Run a Lox script.
@@ -42,15 +42,49 @@ Where:
 -gv = The global variable to return after script execution, objects are converted to a JSON string.
 </pre>
 
-## Example CLI Call
+## Example HTTP Functions in CLI Calls
 <pre>
-CsLox -f "C:\FILES\OIT_LAPTOP_BACKUP\DOCUMENTS\GitHub\LoxLang\test.lox" -gs "var GBL_BASE_NAT_LOG = 2.71828;" -gf "C:\FILES\OIT_LAPTOP_BACKUP\DOCUMENTS\GitHub\LoxLang\globals.lox"
+app.MapPost("/getGlobal", () =>
+{
+    return "{ \"script\":\"var urlGlobal = true;\"}";
+});
 
-CsLox -u https://localhost:7109/getScript -gs "var GBL_BASE_NAT_LOG = 2.71828;" -gf "C:\FILES\OIT_LAPTOP_BACKUP\DOCUMENTS\GitHub\LoxLang\globals.lox" -gu https://localhost:7109/getGlobal -ru https://localhost:7109/setAnswer -gv urlGlobal
+app.MapPost("/getScript", () =>
+{
+    return "{ \"script\":\"urlGlobal = false;\nprint urlGlobal;\"}";
+});
 
-JavaLox -f "C:\FILES\OIT_LAPTOP_BACKUP\DOCUMENTS\GitHub\LoxLang\test.lox" -gs "var GBL_BASE_NAT_LOG = 2.71828;" -gf "C:\FILES\OIT_LAPTOP_BACKUP\DOCUMENTS\GitHub\LoxLang\globals.lox"
+app.MapGet("/getGlobal", () =>
+{
+    return "{ \"script\":\"var urlGlobal = true;\"}";
+});
 
-JavaLox -u https://localhost:7109/getScript -gs "var GBL_BASE_NAT_LOG = 2.71828;" -gf "C:\FILES\OIT_LAPTOP_BACKUP\DOCUMENTS\GitHub\LoxLang\globals.lox" -gu https://localhost:7109/getGlobal -ru https://localhost:7109/setAnswer -gv urlGlobal
+app.MapGet("/getScript", () =>
+{
+    return "{ \"script\":\"urlGlobal = false;\nprint urlGlobal;\"}";
+});
+
+app.MapGet("/setAnswer", (HttpRequest request) =>
+{
+    return "{ \"msg\":\"Found answer: '" + request.Query["answer"] + ", " + request.Query["variableName"] + "'\" }";
+});
+
+app.MapPost("/setAnswer", (HttpRequest request) =>
+{
+    return "{ \"msg\":\"Found answer: '" + request.Form["answer"] + ", " + request.Form["variableName"] + "'\" }";
+});
+</pre>
+
+## Example CLI Calls
+The HTTP server and port number are dependent on how you have the included visual studio project configured.
+<pre>
+CsLox.exe -f "C:\FILES\OIT_LAPTOP_BACKUP\DOCUMENTS\GitHub\LoxLang\test.lox" -gs "var GBL_BASE_NAT_LOG = 2.71828;" -gf "C:\FILES\OIT_LAPTOP_BACKUP\DOCUMENTS\GitHub\LoxLang\globals.lox"
+
+CsLox.exe -u https://localhost:7109/getScript -gs "var GBL_BASE_NAT_LOG = 2.71828;" -gf "C:\FILES\OIT_LAPTOP_BACKUP\DOCUMENTS\GitHub\LoxLang\globals.lox" -gu https://localhost:7109/getGlobal -ru https://localhost:7109/setAnswer -gv urlGlobal
+
+java -jar JavaLox.jar -f "C:\FILES\OIT_LAPTOP_BACKUP\DOCUMENTS\GitHub\LoxLang\test.lox" -gs "var GBL_BASE_NAT_LOG = 2.71828;" -gf "C:\FILES\OIT_LAPTOP_BACKUP\DOCUMENTS\GitHub\LoxLang\globals.lox"
+
+java -jar JavaLox.jar -u https://localhost:7109/getScript -gs "var GBL_BASE_NAT_LOG = 2.71828;" -gf "C:\FILES\OIT_LAPTOP_BACKUP\DOCUMENTS\GitHub\LoxLang\globals.lox" -gu https://localhost:7109/getGlobal -ru https://localhost:7109/setAnswer -gv urlGlobal
 </pre>
 
 ## Testing URL Functionality
@@ -60,8 +94,13 @@ You can test URL functionality by using the CsLoxTestServer project, Visual Stud
 keytool -import -trustcacerts -alias LOX_LOCAL -file "C:\Users\brusc\Downloads\localhost.pem | .cer" -keystore "C:\Program Files\Java\jdk-21\lib\security\cacerts" -storepass LOX_LOCAL            
 </pre>
 
-## Example Output from a URL Test
+Running it on a Windows box in Powershell with Administrator privs looks like so. In this case the .cer is a renamed .pem from the Visual Studio CsLoxTestServer project.
+<pre>
+ &"C:\Program Files\Java\jdk-26\bin\keytool.exe" -import -trustcacerts -alias LOX_LOCAL -file "C:\Users\brusc\Downloads\localhost.cer" -keystore "C:\Program Files\Java\jdk-26\lib\security\cacerts" -storepass LOX_LOCAL   
+</pre>
 
+## Example Output from a URL Test
+Compare to the HTTP function output above.<br>
 <pre>
 run:
 [line 0] Log: Found global file to import: C:\FILES\OIT_LAPTOP_BACKUP\DOCUMENTS\GitHub\LoxLang\globals.lox
@@ -152,6 +191,69 @@ private void initialize() {
       externalGlobals.defineGlobals(globals);
    }
 }
+</pre>
+
+(Java) Creating a sys function handler class to support the following line from the test.lox file.
+<pre>
+sys("test", "fake argument");
+</pre>
+
+<pre>
+class TestLoxCallable implements HandleLoxCallables
+{
+   &commat;Override
+   public Object call(int arity, Interpreter interpreter, List&lt;Object&gt; arguments) {
+      System.out.println(&quot;Custom function handler for sys arg0 of &#39;&quot; + arguments.get(0) + &quot;&#39; with arg1 of &#39;&quot; + arguments.get(1) + &quot;&#39;.&quot;);
+      return null;
+   }
+}
+</pre>
+
+<pre>
+public static HashMap<Object, HandleLoxCallables> handleCalls = new HashMap<Object, HandleLoxCallables> ();
+private static final Interpreter interpreter = new Interpreter(handleCalls);   
+</pre>
+
+<pre>
+handleCalls.put("test", new TestLoxCallable());   
+</pre>
+
+(C#) Creating a sys function handler class to support the following line from the test.lox file:
+<pre>
+sys("test", "fake argument");   
+</pre>
+
+<pre>
+class TestLoxCallable : HandleLoxCallables
+{
+object HandleLoxCallables.call(int arity, Interpreter interpreter, List&lt;object&gt; arguments)
+   {
+      System.Console.Out.WriteLine(&quot;Custom function handler for sys arg0 of &#39;&quot; + arguments[0] + &quot;&#39; with arg1 of &#39;&quot; + arguments[1] + &quot;&#39;.&quot;);
+      return null;
+   }
+}
+</pre>
+
+<pre>
+private static Dictionary<Object, HandleLoxCallables> handleCalls = new Dictionary<object, HandleLoxCallables> ();
+private static readonly Interpreter interpreter = new Interpreter(handleCalls);
+</pre>
+
+<pre>
+handleCalls.Add("test", new TestLoxCallable());   
+</pre>
+
+The output from both of the examples above is as follows:
+<pre>
+PS C:\FILES\OIT_LAPTOP_BACKUP\DOCUMENTS\GitHub\LoxLang\JavaLox\dist> Java -jar JavaLox.jar -f "C:\FILES\OIT_LAPTOP_BACKUP\DOCUMENTS\GitHub\LoxLang\test.lox" -gs "var GBL_BASE_NAT_LOG = 2.71828;" -gf "C:\FILES\OIT_LAPTOP_BACKUP\DOCUMENTS\GitHub\LoxLang\globals.lox"
+[line 0] Log: Found global file to import: C:\FILES\OIT_LAPTOP_BACKUP\DOCUMENTS\GitHub\LoxLang\globals.lox
+[line 0] Log: Found global script to import: var GBL_BASE_NAT_LOG = 2.71828;
+2.71828
+Custom function handler for sys arg0 of 'test' with arg1 of 'fake argument'.
+"inner a"
+"outer b"
+"global c"
+"outer a"   
 </pre>
 
 Starting with the external globals, if defined the "defineGlobals" method is called and passed a reference to the globals environment.
