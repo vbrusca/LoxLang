@@ -277,7 +277,8 @@ Custom function handler for sys arg0 of 'test' with arg1 of 'fake argument'.
 "inner a"
 "outer b"
 "global c"
-"outer a"   
+"outer a" 
+...
 </pre>
 
 Starting with the external globals, if defined the "defineGlobals" method is called and passed a reference to the globals environment.
